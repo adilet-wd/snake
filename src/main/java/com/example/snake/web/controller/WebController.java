@@ -10,7 +10,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class WebController {
     @GetMapping("/hello")
-    public String User(@RequestParam (value = "name", defaultValue = "World") String name) {
+    public String Hello(@RequestParam (value = "name", defaultValue = "World") String name) {
         return String.format("Hello %s!", name);
     }
+    @GetMapping("/user")
+    public String User(@RequestParam (value = "name", defaultValue = "You are logined") String name) {
+        return String.format("Hello, %s!", name);
+    }
+
+    @GetMapping("/admin")
+    public String Admin(@RequestParam (value = "name", defaultValue = "You are Admin") String name) {
+        return String.format("Hello, %s!", name);
+    }
+
 }
