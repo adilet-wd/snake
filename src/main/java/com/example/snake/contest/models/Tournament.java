@@ -1,5 +1,6 @@
 package com.example.snake.contest.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.sql.Date;
@@ -16,28 +17,27 @@ public class Tournament {
     @Column
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "participant_id", referencedColumnName = "id")
-    private Set<Participant> participant_id;
-
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "active_participant_id", referencedColumnName = "id")
-    private Set<Participant> active_participant_id;
-
+    // Дата проведения турнира
     @Column
     private Date date;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "match", referencedColumnName = "id")
-    private Set<Match> match;
+    // В одном турнире участвует множество участников
+    @OneToMany(mappedBy = "tournament", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private Set<Participant> participants;
 
-    public Set<Match> getMatch() {
-        return match;
-    }
+    // Участники, не выбывшие с турнира
+    @OneToMany(mappedBy = "tournament", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private Set<Participant> active_participants;
 
-    public void setMatch(Set<Match> match) {
-        this.match = match;
-    }
+    // В одном турнире множество матчей
+    @OneToMany(mappedBy = "tournament", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private Set<Match> matches;
+
+
+    // Сеттеры геттеры
 
     public Integer getId() {
         return id;
@@ -63,20 +63,28 @@ public class Tournament {
         this.date = date;
     }
 
-    public Set<Participant> getParticipant_id() {
-        return participant_id;
+    public Set<Participant> getParticipants() {
+        return participants;
     }
 
-    public void setParticipant_id(Set<Participant> participant_id) {
-        this.participant_id = participant_id;
+    public void setParticipants(Set<Participant> participants) {
+        this.participants = participants;
     }
 
-    public Set<Participant> getActive_participant_id() {
-        return active_participant_id;
+    public Set<Participant> getActive_participants() {
+        return active_participants;
     }
 
-    public void setActive_participant_id(Set<Participant> active_participant_id) {
-        this.active_participant_id = active_participant_id;
+    public void setActive_participants(Set<Participant> active_participants) {
+        this.active_participants = active_participants;
+    }
+
+    public Set<Match> getMatches() {
+        return matches;
+    }
+
+    public void setMatches(Set<Match> matches) {
+        this.matches = matches;
     }
 
     @Override
@@ -84,11 +92,10 @@ public class Tournament {
         return "Tournament{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", participant_id=" + participant_id +
-                ", active_participant_id=" + active_participant_id +
                 ", date=" + date +
-                ", match=" + match +
+                ", participants=" + participants +
+                ", active_participants=" + active_participants +
+                ", matches=" + matches +
                 '}';
     }
-
 }

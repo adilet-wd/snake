@@ -1,5 +1,6 @@
 package com.example.snake.contest.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -8,18 +9,32 @@ public class Player {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    //    Каждый участник турнира принимает участие в разных матчах
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "participant_id", referencedColumnName = "id")
-    private Participant participant_id;
+    @JoinColumn(name = "participant", referencedColumnName = "id")
+    @JsonBackReference
+    private Participant participant;
 
+    //    Каждый игрок принимает участие в одном матче
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name="match", referencedColumnName = "id")
+    @JsonBackReference
+    private Match match;
+
+    // Баффы, которые игрок получил во время игры
     @Column
     private String buffs;
 
+    // Информация, которую хранит игрок
     @Column
     private String store;
 
+    // Ходы, которые сделал игрок
     @Column
     private String moves;
+
+
+    //    Сеттеры геттеры
 
     public Integer getId() {
         return id;
@@ -29,12 +44,20 @@ public class Player {
         this.id = id;
     }
 
-    public Participant getParticipant_id() {
-        return participant_id;
+//    public Participant getParticipant() {
+//        return participant;
+//    }
+//
+//    public void setParticipant(Participant participant) {
+//        this.participant = participant;
+//    }
+
+    public Match getMatch() {
+        return match;
     }
 
-    public void setParticipant_id(Participant participant_id) {
-        this.participant_id = participant_id;
+    public void setMatch(Match match) {
+        this.match = match;
     }
 
     public String getBuffs() {
@@ -65,7 +88,8 @@ public class Player {
     public String toString() {
         return "Player{" +
                 "id=" + id +
-                ", participant_id=" + participant_id +
+//                ", participant=" + participant +
+                ", match=" + match +
                 ", buffs='" + buffs + '\'' +
                 ", store='" + store + '\'' +
                 ", moves='" + moves + '\'' +
