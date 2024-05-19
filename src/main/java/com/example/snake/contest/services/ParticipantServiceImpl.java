@@ -1,14 +1,12 @@
 package com.example.snake.contest.services;
 
 import com.example.snake.contest.dto.CreateParticipantDTO;
-import com.example.snake.contest.dto.CreateTournamentDTO;
 import com.example.snake.contest.models.Participant;
 import com.example.snake.contest.models.Tournament;
 import com.example.snake.contest.repositories.ParticipantRepository;
 import com.example.snake.contest.repositories.TournamentRepository;
 import com.example.snake.security.models.CustomUser;
 import com.example.snake.security.repositories.CustomUserRepository;
-import jakarta.servlet.http.Part;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,6 +45,19 @@ public class ParticipantServiceImpl implements ParticipantService{
         return participant;
     }
 
+    @Transactional
+    @Override
+    public void deleteParticipant(long id) {
+
+    }
+
+    @Transactional
+    @Override
+    public void updateParticipant(Participant participant) {
+
+    }
+
+
     private Participant convertToEntity(CreateParticipantDTO createParticipantDTO) {
         Participant participant = new Participant();
         participant.setFunction(createParticipantDTO.getFunction());
@@ -63,17 +74,5 @@ public class ParticipantServiceImpl implements ParticipantService{
         participant.setUsername(user.getUsername());
 
         return participant;
-    }
-
-    @Transactional
-    @Override
-    public void deleteParticipant(long id) {
-
-    }
-
-    @Transactional
-    @Override
-    public void updateParticipant(Participant participant) {
-
     }
 }

@@ -9,15 +9,19 @@ public class Player {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    //    Имя игрока т.е имя Participant
+    @Column
+    private String username;
+
     //    Каждый участник турнира принимает участие в разных матчах
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "participant", referencedColumnName = "id")
+    @JoinColumn(name = "participant_id", referencedColumnName = "id")
     @JsonBackReference
     private Participant participant;
 
     //    Каждый игрок принимает участие в одном матче
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name="match", referencedColumnName = "id")
+    @JoinColumn(name="match_id", referencedColumnName = "id")
     @JsonBackReference
     private Match match;
 
@@ -36,6 +40,7 @@ public class Player {
 
     //    Сеттеры геттеры
 
+
     public Integer getId() {
         return id;
     }
@@ -44,13 +49,21 @@ public class Player {
         this.id = id;
     }
 
-//    public Participant getParticipant() {
-//        return participant;
-//    }
-//
-//    public void setParticipant(Participant participant) {
-//        this.participant = participant;
-//    }
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public Participant getParticipant() {
+        return participant;
+    }
+
+    public void setParticipant(Participant participant) {
+        this.participant = participant;
+    }
 
     public Match getMatch() {
         return match;
@@ -88,7 +101,8 @@ public class Player {
     public String toString() {
         return "Player{" +
                 "id=" + id +
-//                ", participant=" + participant +
+                ", username='" + username + '\'' +
+                ", participant=" + participant +
                 ", match=" + match +
                 ", buffs='" + buffs + '\'' +
                 ", store='" + store + '\'' +

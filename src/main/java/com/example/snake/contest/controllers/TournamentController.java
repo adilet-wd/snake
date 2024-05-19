@@ -23,9 +23,8 @@ public class TournamentController {
     }
 
     @PostMapping("/tournament")
-    public String save(@Valid @RequestBody CreateTournamentDTO tournamentDTO) {
-        tournamentService.saveTournament(tournamentDTO);
-        return "Tournament created";
+    public Tournament save(@Valid @RequestBody CreateTournamentDTO tournamentDTO) {
+        return tournamentService.saveTournament(tournamentDTO);
     }
 
 

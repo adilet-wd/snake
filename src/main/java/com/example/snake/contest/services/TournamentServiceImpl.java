@@ -30,9 +30,10 @@ public class TournamentServiceImpl implements TournamentService {
 
     @Transactional
     @Override
-    public void saveTournament(CreateTournamentDTO createTournamentDTO) {
+    public Tournament saveTournament(CreateTournamentDTO createTournamentDTO) {
         Tournament tournament = convertToEntity(createTournamentDTO);
         repository.save(tournament);
+        return tournament;
     }
 
     private Tournament convertToEntity(CreateTournamentDTO createTournamentDTO) {

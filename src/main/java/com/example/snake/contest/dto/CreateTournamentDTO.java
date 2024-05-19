@@ -29,4 +29,5 @@ public class CreateTournamentDTO {
         this.date = date;
     }
 
+
 }

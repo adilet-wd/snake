@@ -21,7 +21,7 @@ public class ParticipantController {
         return participantService.getParticipants();
     }
 
-    @PostMapping("/participant"
+    @PostMapping("/participant")
     public Participant save(@Valid @RequestBody CreateParticipantDTO createParticipantDTO) {
         return participantService.saveParticipant(createParticipantDTO);
     }

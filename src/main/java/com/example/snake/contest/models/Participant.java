@@ -37,6 +37,10 @@ public class Participant {
     @JsonBackReference
     private Tournament tournament;
 
+    @OneToMany(mappedBy = "participant", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private Set<Player> players;
+
     //    Сеттеры геттеры
 
     public Integer getId() {

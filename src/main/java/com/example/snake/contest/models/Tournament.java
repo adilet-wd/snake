@@ -2,6 +2,7 @@ package com.example.snake.contest.models;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.servlet.http.Part;
 
 import java.sql.Date;
 import java.util.Set;
@@ -35,6 +36,10 @@ public class Tournament {
     @OneToMany(mappedBy = "tournament", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference
     private Set<Match> matches;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "winner_id", referencedColumnName = "id")
+    private Participant winner_id;
 
 
     // Сеттеры геттеры
@@ -87,6 +92,14 @@ public class Tournament {
         this.matches = matches;
     }
 
+    public Participant getWinner_id() {
+        return winner_id;
+    }
+
+    public void setWinner_id(Participant winner_id) {
+        this.winner_id = winner_id;
+    }
+
     @Override
     public String toString() {
         return "Tournament{" +
@@ -96,6 +109,7 @@ public class Tournament {
                 ", participants=" + participants +
                 ", active_participants=" + active_participants +
                 ", matches=" + matches +
+                ", winner_id=" + winner_id +
                 '}';
     }
 }
