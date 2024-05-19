@@ -27,6 +27,7 @@ public class SecurityConfiguration {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(registry -> {
+            registry.requestMatchers("/swagger-ui/**").permitAll();
             registry.requestMatchers("/hello","/register/").permitAll();
             registry.requestMatchers("/user/**").hasRole("USER");
             registry.requestMatchers("/admin/**").hasRole("ADMIN");

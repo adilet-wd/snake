@@ -15,7 +15,7 @@ public class Tournament {
     @Column
     private Integer id;
 
-    @Column
+    @Column(unique = true)
     private String name;
 
     // Дата проведения турнира
@@ -37,6 +37,7 @@ public class Tournament {
     @JsonManagedReference
     private Set<Match> matches;
 
+    // Победитель турнира
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "winner_id", referencedColumnName = "id")
     private Participant winner_id;
