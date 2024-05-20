@@ -55,7 +55,7 @@ public class ParticipantController {
     }
 
     @GetMapping("participant/{tournamentId}/{id}/")
-    @Operation(summary = "Participants of tournament", description = "Получение участника турнира", tags = { "participant" })
+    @Operation(summary = "Participant of tournament", description = "Получение участника турнира", tags = { "participant" })
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
@@ -68,11 +68,11 @@ public class ParticipantController {
         return participantService.getParticipant(tournamentId, id);
     }
 
-    @DeleteMapping("participant/{tournamentId}/{id}/")
-    @Operation(summary = "Delete participant", description = "Удаление участника", tags = { "participant" })
-    public ResponseEntity<?> deleteParticipant(@PathVariable long tournamentId, @PathVariable long id) {
-        return participantService.deleteParticipant(tournamentId, id);
-    }
+//    @DeleteMapping("participant/{tournamentId}/{id}/")
+//    @Operation(summary = "Delete participant", description = "Удаление участника", tags = { "participant" })
+//    public ResponseEntity<?> deleteParticipant(@PathVariable long tournamentId, @PathVariable long id) {
+//        return participantService.deleteParticipant(tournamentId, id);
+//    }
 
     @PatchMapping("participant/{tournamentId}/{id}/")
     @Operation(summary = "Edit participant", description = "Изменение участника", tags = { "participant" })

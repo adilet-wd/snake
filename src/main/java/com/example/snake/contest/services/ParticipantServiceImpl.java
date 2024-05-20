@@ -16,10 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.swing.text.html.Option;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ParticipantServiceImpl implements ParticipantService{
@@ -60,8 +57,12 @@ public class ParticipantServiceImpl implements ParticipantService{
             response.put("message", "Турнир не найден");
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
+
         // Поиск участника с таким id
-        Optional<Participant> participantExist = repository.findById(id);
+        Set<Participant> participants = tournamentExist.get().getActive_participants();
+        Optional<Participant> participantExist = participants.stream()
+                .filter(participant -> participant.getId() == id).findFirst();
+
         if(participantExist.isEmpty()){
             response.put("message", "Участник не найден");
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
@@ -122,7 +123,9 @@ public class ParticipantServiceImpl implements ParticipantService{
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
         // Поиск участника с таким id
-        Optional<Participant> participantExist = repository.findById(id);
+        Set<Participant> participants = tournamentExist.get().getActive_participants();
+        Optional<Participant> participantExist = participants.stream()
+                .filter(participant -> participant.getId() == id).findFirst();
         if(participantExist.isEmpty()){
             response.put("message", "Участник не найден");
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);

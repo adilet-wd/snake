@@ -13,11 +13,11 @@ import java.util.List;
 @RequestMapping("/api")
 public class PlayerController {
 
-    @Autowired
-    private PlayerService playerService;
-
-    @GetMapping("/players")
-    public List<Player> get() {
-        return playerService.getAllPlayers();
-    }
+//    @Autowired
+//    private PlayerService playerService;
+//
+//    @GetMapping("/players")
+//    public List<Player> get() {
+//        return playerService.getAllPlayers();
+//    }
 }

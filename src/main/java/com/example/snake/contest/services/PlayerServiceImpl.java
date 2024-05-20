@@ -59,7 +59,8 @@ public class PlayerServiceImpl implements PlayerService{
 
     private Player convertToEntity(CreatePlayerDTO createPlayerDTO) {
         Player player = new Player();
-        Participant participant = participantRepository.findById(createPlayerDTO.getParticipant_id())
+        Long participantId = Long.valueOf(createPlayerDTO.getParticipant_id());
+        Participant participant = participantRepository.findById(participantId)
                 .orElseThrow( ()-> new RuntimeException("Participant not found for id: "+createPlayerDTO.getParticipant_id()));
        player.setParticipant(participant);
         player.setUsername(participant.getUsername());

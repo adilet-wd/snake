@@ -11,7 +11,7 @@ public class CreateParticipantDTO {
     @NotNull(message = "function is required")
     private String function;
 
-    @NotNull(message = "Tournament id can't be null")@NotNull
+    @NotNull(message = "Tournament id can't be null")
     private Long tournament_id;
 
     @NotNull(message = "User id can't be null")
