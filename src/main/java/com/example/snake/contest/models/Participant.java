@@ -18,7 +18,7 @@ public class Participant {
     @Column
     private Integer id;
 
-    @Column(unique = true)
+    @Column
     private String username;
 
     //    Функция пользователя, которую он отправляет при регистрации на турнир
@@ -83,6 +83,14 @@ public class Participant {
         this.username = username;
     }
 
+    public Set<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(Set<Player> players) {
+        this.players = players;
+    }
+
     @Override
     public String toString() {
         return "Participant{" +
@@ -91,6 +99,7 @@ public class Participant {
                 ", function='" + function + '\'' +
                 ", customUser=" + customUser +
                 ", tournament=" + tournament +
+                ", players=" + players +
                 '}';
     }
 }

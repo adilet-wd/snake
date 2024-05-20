@@ -25,7 +25,7 @@ public class TournamentController {
     @Autowired
     private TournamentService tournamentService;
 
-    @PostMapping("/tournament/")
+    @PostMapping("tournament/")
     @Operation(summary = "Create tournament", description = "Создание турнира, доступно только для ADMIN", tags = { "tournament" })
     @ApiResponses(value = {
             @ApiResponse(
@@ -40,13 +40,13 @@ public class TournamentController {
     }
 
 
-    @GetMapping("/tournament/")
+    @GetMapping("tournament/")
     @Operation(summary = "Get all tournaments", description = "Получение всех турниров", tags = { "tournament" })
     public List<Tournament> get() {
         return tournamentService.getTournaments();
     }
 
-    @GetMapping("/tournament/{id}/")
+    @GetMapping("tournament/{id}/")
     @Operation(summary = "Get tournament by id", description = "Получение турнира по id, , доступно только для ADMIN" , tags = { "tournament" })
     @ApiResponses(value = {
             @ApiResponse(
@@ -60,7 +60,7 @@ public class TournamentController {
         return tournamentService.getTournamentById(id);
     }
 
-    @GetMapping("/tournament")
+    @GetMapping("tournament")
     @Operation(summary = "Get tournament by name", description = "Получение турнира по name" , tags = { "tournament" })
     @ApiResponses(value = {
             @ApiResponse(
@@ -74,7 +74,7 @@ public class TournamentController {
         return tournamentService.getTournamentByName(name);
     }
 
-    @DeleteMapping ("/tournament/{id}/")
+    @DeleteMapping ("tournament/{id}/")
     @Operation(summary = "Delete tournament by id", description = "Удаление турнира по id, доступно только для ADMIN", tags = { "tournament" })
     public ResponseEntity<?> delete(@PathVariable long id) {
         return tournamentService.deleteTournament(id);

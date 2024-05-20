@@ -10,8 +10,6 @@ public interface TournamentService {
     List<Tournament> getTournaments();
     ResponseEntity<?> getTournamentById(long id);
     ResponseEntity<?> getTournamentByName(String name);
-
     ResponseEntity<?> saveTournament(CreateTournamentDTO createTournamentDTO);
     ResponseEntity<?> deleteTournament(long id);
-    void updateTournament(Tournament tournament);
 }

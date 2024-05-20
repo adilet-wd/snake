@@ -1,14 +1,14 @@
 package com.example.snake.contest.services;
 
 import com.example.snake.contest.dto.CreateParticipantDTO;
+import com.example.snake.contest.dto.UpdateParticipantDTO;
 import com.example.snake.contest.models.Participant;
-
-import java.util.List;
+import org.springframework.http.ResponseEntity;
 
 public interface ParticipantService {
-    List<Participant> getParticipants();
-    Participant getParticipant(long id);
-    Participant saveParticipant(CreateParticipantDTO createParticipantDTO);
-    void deleteParticipant(long id);
-    void updateParticipant(Participant participant);
+    ResponseEntity<?> getParticipants(long tournamentId);
+    ResponseEntity<?> getParticipant(long tournamentId, long id);
+    ResponseEntity<?> saveParticipant(CreateParticipantDTO createParticipantDTO);
+    ResponseEntity<?> deleteParticipant(long tournamentId, long id);
+    ResponseEntity<?> updateParticipant(UpdateParticipantDTO updateParticipantDTO, long tournamentId, long id);
 }

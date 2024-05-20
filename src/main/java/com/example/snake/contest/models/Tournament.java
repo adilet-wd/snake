@@ -22,6 +22,10 @@ public class Tournament {
     @Column
     private Date date;
 
+    // Описание турнира
+    @Column
+    private String description;
+
     // В одном турнире участвует множество участников
     @OneToMany(mappedBy = "tournament", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference
@@ -101,12 +105,22 @@ public class Tournament {
         this.winner_id = winner_id;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+
     @Override
     public String toString() {
         return "Tournament{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", date=" + date +
+                ", description='" + description + '\'' +
                 ", participants=" + participants +
                 ", active_participants=" + active_participants +
                 ", matches=" + matches +

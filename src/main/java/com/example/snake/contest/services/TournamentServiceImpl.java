@@ -35,9 +35,9 @@ public class TournamentServiceImpl implements TournamentService {
         Optional<Tournament> tournamentExist = repository.findById(id);
 
         if(tournamentExist.isEmpty()){
-            Map<String, String> errorResponse = new HashMap<>();
-            errorResponse.put("message", "Турнир не найден");
-            return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Турнир не найден");
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
 
         return new ResponseEntity<>(tournamentExist, HttpStatus.OK);
@@ -52,9 +52,9 @@ public class TournamentServiceImpl implements TournamentService {
         Optional<Tournament> tournamentExist = repository.findByName(name);;
 
         if(tournamentExist.isEmpty()){
-            Map<String, String> errorResponse = new HashMap<>();
-            errorResponse.put("message", "Турнир не найден");
-            return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Турнир не найден");
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
 
         return new ResponseEntity<>(tournamentExist, HttpStatus.OK);
@@ -70,9 +70,9 @@ public class TournamentServiceImpl implements TournamentService {
         Optional<Tournament> tournamentExist = repository.findByName(createTournamentDTO.getName());
 
         if(tournamentExist.isPresent()){
-            Map<String, String> errorResponse = new HashMap<>();
-            errorResponse.put("message", "Турнир с таким названием уже существует");
-            return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Турнир с таким названием уже существует");
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
 
         Tournament tournament = convertToEntity(createTournamentDTO);
@@ -95,15 +95,10 @@ public class TournamentServiceImpl implements TournamentService {
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
 
-        response.put("message", "Турнир удален");
         repository.delete(tournamentExist.get());
+        response.put("message", "Турнир удален");
+
         return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
-    @Transactional
-    @Override
-    public void updateTournament(Tournament tournament) {
-
     }
 
     //    Превращение DTO в Entity
@@ -111,6 +106,7 @@ public class TournamentServiceImpl implements TournamentService {
         Tournament tournament = new Tournament();
         tournament.setName(createTournamentDTO.getName());
         tournament.setDate(createTournamentDTO.getDate());
+        tournament.setDescription(createTournamentDTO.getDescription());
         return tournament;
     }
 
